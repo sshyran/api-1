@@ -1,7 +1,7 @@
 import * as objectMapper from 'object-mapper';
 import * as _ from 'lodash';
 import { MediaMetadataInterface } from '../models/MediaMetadata';
-import {SeriesMetadataInterface } from '../models/SeriesMetadata';
+import { SeriesMetadataInterface } from '../models/SeriesMetadata';
 
 const openSubtitlesMap = {  
   'metadata.cast': [
