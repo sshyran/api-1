@@ -1,7 +1,6 @@
 import * as episodeParser from 'episode-parser';
 import * as mongoose from 'mongoose';
 import { Schema, Document, Model } from 'mongoose';
-import FailedLookups from '../models/FailedLookups';
 
 const DOCUMENT_EXPIRY_IN_SECONDS = 2592000; // 30 days
 
