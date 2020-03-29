@@ -1,10 +1,12 @@
 import MediaMetadataModel from '../../src/models/MediaMetadata';
+import SeriesMetadataModel from '../../src/models/SeriesMetadata';
 import FailedLookupsModel from '../../src/models/FailedLookups';
 
 import * as mongoose from 'mongoose';
 import got from 'got';
 
 import { MongoMemoryServer } from 'mongodb-memory-server';
+import SeriesMetadata from '../../src/models/SeriesMetadata';
 const mongod = new MongoMemoryServer();
 
 const interstellarMetaData = {
@@ -34,6 +36,7 @@ describe('Media Metadata endpoints', () => {
 
   afterAll(async() => {
     await MediaMetadataModel.deleteMany({});
+    await SeriesMetadataModel.deleteMany({});
     await mongoose.disconnect();
   });
 
@@ -120,6 +123,23 @@ describe('Media Metadata endpoints', () => {
       } catch (err) {
         expect(err).toBeInstanceOf(Error);
       }
+    });
+  });
+
+  describe('get series by title', () => {
+    it('should return series MetaData for a valid series', async() => {
+      const body = JSON.stringify({ title: 'Homeland' });
+      const response = await got.post(`${appUrl}/api/media/seriestitle`, { responseType: 'json', headers: { 'content-type': 'application/json' }, body });
+      expect(response.body).toHaveProperty('title', 'Homeland');
+      expect(response.body).toHaveProperty('imdbID', 'tt1796960');
+
+      const doc = await SeriesMetadata.find({});
+
+      expect(doc[0]).toHaveProperty('_id');
+      expect(doc[0]).toHaveProperty('title', 'Homeland');
+      expect(doc[0]).toHaveProperty('startYear', '2011');
+      expect(doc[0]).toHaveProperty('totalSeasons', 8);
+      expect(doc[0]).toHaveProperty('startYear', '2011');
     });
   });
 });

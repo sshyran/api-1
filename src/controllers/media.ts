@@ -195,7 +195,7 @@ export const getBySanitizedTitle = async(ctx: Context): Promise<MediaMetadataInt
 };
 
 export const getSeriesByTitle = async(ctx: Context): Promise<SeriesMetadataInterface | string> => {
-  const { title: dirOrFilename } = ctx.request.body;
+  let { title: dirOrFilename } = ctx.request.body;
 
   if (!dirOrFilename) {
     throw new Error('title is required');
@@ -212,12 +212,9 @@ export const getSeriesByTitle = async(ctx: Context): Promise<SeriesMetadataInter
   }
 
   const parsed = episodeParser(dirOrFilename);
+  dirOrFilename = parsed && parsed.show ? parsed.show : dirOrFilename;
 
-  if (!parsed.show) {
-    return ctx.body = MESSAGES.seriesNotFound;
-  }
-
-  const tvSeriesInfo = await imdbAPI.get({ name: parsed.show });
+  const tvSeriesInfo = await imdbAPI.get({ name: dirOrFilename });
 
   if (!tvSeriesInfo) {
     await FailedLookups.updateOne({ title: dirOrFilename, type: 'series' }, {}, { upsert: true, setDefaultsOnInsert: true });

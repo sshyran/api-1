@@ -694,3 +694,46 @@ nock('https://www.omdbapi.com:443', {"encodedQueryParams":true})
   'CF-RAY',
   '57aeaa4bcde4fb98-AKL'
 ]);
+
+nock('https://www.omdbapi.com:443', {"encodedQueryParams":true})
+  .persist()
+  .get('/')
+  .query({"plot":"full","r":"json","t":"Homeland"})
+  .reply(200, {"Title":"Homeland","Year":"2011–2020","Rated":"TV-MA","Released":"02 Oct 2011","Runtime":"55 min","Genre":"Crime, Drama, Mystery, Thriller","Director":"N/A","Writer":"Alex Gansa, Howard Gordon","Actors":"Claire Danes, Mandy Patinkin, Rupert Friend, Maury Sterling","Plot":"Carrie Mathison, a CIA operations officer, is on probation after carrying out an unauthorized operation in Iraq. As a result, she has been reassigned to the Counter terrorism center. Whilst in Iraq, she was warned that an American prisoner had been turned by Al-Qaeda. When Nicholas Brody, a U.S. Marine Sergeant, is rescued after being held hostage since 2003, she suspects that he is the one. While Brody is received home as a war hero, Carrie goes to any lengths necessary to catch him out.","Language":"English","Country":"USA","Awards":"Won 5 Golden Globes. Another 55 wins & 172 nominations.","Poster":"https://m.media-amazon.com/images/M/MV5BYjY2ODA0NjYtMzlkMi00ZjY5LThiNjUtNzZjYzgxNjc0MzQzXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg","Ratings":[{"Source":"Internet Movie Database","Value":"8.3/10"}],"Metascore":"N/A","imdbRating":"8.3","imdbVotes":"290,809","imdbID":"tt1796960","Type":"series","totalSeasons":"8","Response":"True"}, [
+  'Date',
+  'Sun, 29 Mar 2020 00:23:52 GMT',
+  'Content-Type',
+  'application/json; charset=utf-8',
+  'Content-Length',
+  '1216',
+  'Connection',
+  'close',
+  'Set-Cookie',
+  '__cfduid=dcf597a773877acf4897cb55b40187ab11585441432; expires=Tue, 28-Apr-20 00:23:52 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax',
+  'Cache-Control',
+  'public, max-age=86400',
+  'Expires',
+  'Sat, 28 Mar 2020 23:29:16 GMT',
+  'Last-Modified',
+  'Sat, 28 Mar 2020 22:29:16 GMT',
+  'Vary',
+  '*',
+  'X-AspNet-Version',
+  '4.0.30319',
+  'X-Powered-By',
+  'ASP.NET',
+  'Access-Control-Allow-Origin',
+  '*',
+  'CF-Cache-Status',
+  'HIT',
+  'Age',
+  '6876',
+  'Accept-Ranges',
+  'bytes',
+  'Expect-CT',
+  'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+  'Server',
+  'cloudflare',
+  'CF-RAY',
+  '57b571d939fffd42-SYD'
+]);
